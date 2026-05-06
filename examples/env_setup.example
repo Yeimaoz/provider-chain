@@ -1,0 +1,16 @@
+# Copy to .env or export directly. Set whichever providers you have.
+
+# Cloud (free tiers)
+GEMINI_API_KEY=AIza...               # 1500 RPD free
+GROQ_API_KEY=gsk_...                 # 100k TPD free, 12k TPM
+OPENROUTER_API_KEY=sk-or-v1-...      # 50 RPD free per :free model
+
+# Cloud (paid)
+DEEPSEEK_API_KEY=sk-...              # prepaid pay-as-you-go
+
+# Local
+OLLAMA_API_URL=http://localhost:11434
+
+# OpenRouter app identity (optional, customize for your project)
+LLM_CHAIN_HTTP_REFERER=https://github.com/yourname/yourproject
+LLM_CHAIN_APP_TITLE=your-app-name
