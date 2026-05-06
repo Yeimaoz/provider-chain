@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "lcz-llm-chain"
+name = "provider-chain"
 version = "1.0.0"
 description = "Task-aware LLM provider chain with N-tier fallback (Gemini / Groq / DeepSeek / OpenRouter / Ollama)"
 authors = [{name = "Li-Cheng Zheng"}]
@@ -36,7 +36,7 @@ Issues = "https://github.com/Yeimaoz/provider-chain/issues"
 Changelog = "https://github.com/Yeimaoz/provider-chain/blob/main/CHANGELOG.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/lcz_llm_chain"]
+packages = ["src/provider_chain"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

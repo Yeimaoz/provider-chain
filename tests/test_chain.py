@@ -11,7 +11,7 @@ import pytest
 
 
 def test_public_imports():
-    from lcz_llm_chain import (
+    from provider_chain import (
         ask,
         embed,
         wrap_untrusted,
@@ -30,7 +30,7 @@ def test_public_imports():
 
 
 def test_task_model_matrix_shape():
-    from lcz_llm_chain import TASK_MODEL_MATRIX, PROVIDERS
+    from provider_chain import TASK_MODEL_MATRIX, PROVIDERS
 
     expected_tasks = {"ner", "summary_zh", "deep_reason", "code", "vision", "embedding"}
     assert set(TASK_MODEL_MATRIX.keys()) == expected_tasks
@@ -41,7 +41,7 @@ def test_task_model_matrix_shape():
 
 
 def test_providers_dicts_consistent():
-    from lcz_llm_chain import PROVIDERS, PROVIDER_ENDPOINTS, PROVIDER_TIMEOUT
+    from provider_chain import PROVIDERS, PROVIDER_ENDPOINTS, PROVIDER_TIMEOUT
 
     for p in PROVIDERS:
         assert p in PROVIDER_ENDPOINTS, f"{p} missing endpoint"
@@ -51,7 +51,7 @@ def test_providers_dicts_consistent():
 
 def test_ask_returns_none_no_env(monkeypatch):
     """When all provider env vars are missing, ask() should silently return None."""
-    from lcz_llm_chain import ask, PROVIDER_ENDPOINTS
+    from provider_chain import ask, PROVIDER_ENDPOINTS
 
     for env_key, _ in PROVIDER_ENDPOINTS.values():
         monkeypatch.delenv(env_key, raising=False)
@@ -65,6 +65,6 @@ def test_ask_returns_none_no_env(monkeypatch):
 
 
 def test_ask_unknown_task_raises():
-    from lcz_llm_chain import ask
+    from provider_chain import ask
     with pytest.raises(KeyError):
         ask("unknown_task", "test")  # type: ignore[arg-type]

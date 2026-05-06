@@ -5,9 +5,9 @@ from pathlib import Path
 
 def test_log_usage_writes_jsonl(tmp_path, monkeypatch):
     log_path = tmp_path / "usage.jsonl"
-    monkeypatch.setattr("lcz_llm_chain.chain.USAGE_LOG", log_path)
+    monkeypatch.setattr("provider_chain.chain.USAGE_LOG", log_path)
 
-    from lcz_llm_chain.chain import _log_usage
+    from provider_chain.chain import _log_usage
     _log_usage("ollama", "ner", "qwen2.5:7b", 100, 50, 234.5, success=True)
 
     assert log_path.exists()
@@ -23,10 +23,10 @@ def test_log_usage_writes_jsonl(tmp_path, monkeypatch):
 
 def test_log_usage_disabled_via_env(tmp_path, monkeypatch):
     log_path = tmp_path / "usage.jsonl"
-    monkeypatch.setattr("lcz_llm_chain.chain.USAGE_LOG", log_path)
+    monkeypatch.setattr("provider_chain.chain.USAGE_LOG", log_path)
     monkeypatch.setenv("LCZ_LLM_CHAIN_DISABLE_TELEMETRY", "1")
 
-    from lcz_llm_chain.chain import _log_usage
+    from provider_chain.chain import _log_usage
     _log_usage("ollama", "ner", "qwen2.5:7b", 100, 50, 234.5, True)
 
     assert not log_path.exists()
@@ -34,8 +34,8 @@ def test_log_usage_disabled_via_env(tmp_path, monkeypatch):
 
 def test_log_usage_silent_on_fs_error(monkeypatch):
     """Should not raise when log path is unwritable."""
-    monkeypatch.setattr("lcz_llm_chain.chain.USAGE_LOG", Path("/nonexistent/no/perm/usage.jsonl"))
+    monkeypatch.setattr("provider_chain.chain.USAGE_LOG", Path("/nonexistent/no/perm/usage.jsonl"))
 
-    from lcz_llm_chain.chain import _log_usage
+    from provider_chain.chain import _log_usage
     # should not raise
     _log_usage("ollama", "ner", "model", 0, 0, 0, True)

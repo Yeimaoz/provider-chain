@@ -1,4 +1,4 @@
-# lcz-llm-chain
+# provider-chain
 
 Task-aware LLM provider chain with N-tier fallback and prompt injection defense.
 
@@ -20,7 +20,7 @@ pip install "git+https://github.com/Yeimaoz/provider-chain.git@v1.0.0"
 ## Quick Start
 
 ```python
-from lcz_llm_chain import ask, wrap_untrusted
+from provider_chain import ask, wrap_untrusted
 
 # task-routed call — tries providers in order until one succeeds
 result = ask("ner", "TSMC announced 2nm process node")
@@ -93,13 +93,13 @@ The chain automatically skips any provider whose API key is not set.
 known injection regex matches.
 
 ```python
-from lcz_llm_chain import wrap_untrusted, sanitize_user_input
+from provider_chain import wrap_untrusted, sanitize_user_input
 
 safe_prompt = f"Extract entities from: {wrap_untrusted(scraped_html)}"
 clean_query = sanitize_user_input(user_form_input)
 ```
 
-See `src/lcz_llm_chain/sanitize.py` for the `INJECTION_PATTERNS` regex list.
+See `src/provider_chain/sanitize.py` for the `INJECTION_PATTERNS` regex list.
 
 ## Examples
 

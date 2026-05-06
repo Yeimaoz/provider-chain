@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 # Telemetry
 # ---------------------------------------------------------------------------
 
-USAGE_LOG = Path.home() / ".lcz-llm-chain-usage.jsonl"
+USAGE_LOG = Path.home() / ".provider-chain-usage.jsonl"
 
 
 def _log_usage(
@@ -50,7 +50,7 @@ def _log_usage(
     latency_ms: float,
     success: bool,
 ) -> None:
-    """Append usage record to ~/.lcz-llm-chain-usage.jsonl. Silent fail.
+    """Append usage record to ~/.provider-chain-usage.jsonl. Silent fail.
 
     Disable via LCZ_LLM_CHAIN_DISABLE_TELEMETRY=1.
     """
@@ -231,7 +231,7 @@ def _load_env_once() -> None:
                     _ENV_CACHE[k] = v.strip().strip('"').strip("'")
             break
         except Exception as exc:
-            logger.debug(f"[lcz_llm_chain] .env read failed at {env_path}: {exc}")
+            logger.debug(f"[provider_chain] .env read failed at {env_path}: {exc}")
 
 
 def _get_env(key: str) -> Optional[str]:
@@ -245,7 +245,7 @@ def _get_env(key: str) -> Optional[str]:
 
 def _build_headers(provider: ProviderName, env_val: str) -> dict[str, str]:
     """Build HTTP headers for a given provider."""
-    base = {"Content-Type": "application/json", "User-Agent": "lcz-llm-chain/0.1.0"}
+    base = {"Content-Type": "application/json", "User-Agent": "provider-chain/0.1.0"}
     if provider == "ollama":
         # env_val is the base URL, not an API key
         # OLLAMA_API_KEY is optional; add if set
@@ -363,7 +363,7 @@ def _chat_gemini_once(
     if system_instruction is not None:
         body["systemInstruction"] = system_instruction
 
-    headers = {"Content-Type": "application/json", "User-Agent": "lcz-llm-chain/0.3.0"}
+    headers = {"Content-Type": "application/json", "User-Agent": "provider-chain/0.3.0"}
     start = time.monotonic()
     try:
         resp = httpx.post(url, headers=headers, json=body, timeout=timeout)

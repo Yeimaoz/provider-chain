@@ -28,7 +28,7 @@ What actually happened. Include full traceback if available.
 ## Environment
 
 - Python version:
-- lcz-llm-chain version:
+- provider-chain version:
 - OS:
 - Provider(s) used:
 

@@ -1,5 +1,5 @@
 """Chinese NER example using gemini → groq → openrouter chain."""
-from lcz_llm_chain import ask
+from provider_chain import ask
 
 prompt = """Extract structured info from the news, return JSON:
 {
